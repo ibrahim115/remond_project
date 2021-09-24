@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-// @route GET api/users
-// @desc Test route
+// @routeGET api/posts
+// @descTest route
 // @access Public atau Private
 
-router.get('/', (req,res) => res.send('User route'));
+router.get('/', (req,res) => res.send('Posts route'));
 
 
 // export route

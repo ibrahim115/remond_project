@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-// @routeGET api/profile
-// @descTest route
+// @route GET api/profile
+// @desc Test route
 // @access Public atau Private
 
 router.get('/', (req,res) => res.send('Profile route'));
