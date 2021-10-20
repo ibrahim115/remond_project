@@ -3,10 +3,7 @@ const router = express.Router();
 
 // @routeGET api/profile
 // @descTest route
-// @access Public atau Private
+// @accessPublic atau Private
 
-router.get('/', (req,res) => res.send('Profile route'));
-
-
-// export route
+router.get('/', (req, res) => res.send('Profile route'));
 module.exports = router;
