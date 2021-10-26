@@ -1,9 +1,23 @@
 const express = require('express');
-const router=express.Router();
+const router = express.Router();
+const { check, validationResult } = require('express-validator');
 
-// @routeGET api/users
-// @descTest route
-// @accessPublic atau Private
+// @route POST api/users
+// @desc Register user
+// @access Public
 
-router.get('/', (req, res) => res.send('User route'));
+router.post('/', [
+  check ('name', 'Nama harus di isi').not().isEmpty(),
+  check ('email', 'isi dengan valid email').isEmail(),
+  check ('password', 'Isi password minimal 6 atau lebih karakter').isLength({ min: 6 })],
+(req, res) => {
+  // handle request
+  const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+  res.send('User route')
+});
+
+// export route
 module.exports = router;
