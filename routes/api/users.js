@@ -50,7 +50,7 @@ router.post('/', [
       avatar,
       password
     });
-    // Encrypt password dengan bcyript
+    // Encrypt password dengan bcrypt
     // membuat format hash dengan "salt"
     const salt = await bcrypt.genSalt(10);
     
