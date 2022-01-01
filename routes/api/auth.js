@@ -47,15 +47,11 @@ router.post('/', [
     }
     
     // compare password bawaan bycrptjs
-    const isMatch = await bycrpt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(400).json({ error: [{ msg: "User Invalid" }] })
     }
-
-    // Return jsonwebtoken
-
-    //res.send('User route')
 
     // Return jsonwebtoken
     const payload = {
@@ -72,8 +68,7 @@ router.post('/', [
     if (err) throw err;
     res.json({ token });
   }
-  );
-
+  )
 
   } catch(err) {
     console.error(err.message);
