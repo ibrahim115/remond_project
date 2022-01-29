@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const {check, validationResult} = require ('express-validator/check');
+const {check, validationResult} = require ('express-validator');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/Users');
@@ -70,11 +70,42 @@ async (req,res) => {
     if (bio) profileFields.bio = bio;
     if (status) profileFields.status = status;
     if (githubusername) profileFields.githubusername = githubusername;
-    if (skills) {
-      profileFields.skills = skills.split(',').map(skill => skill.trim());
+    if (skills) {profileFields.skills=skills.split(',').map(skill=>skill.trim());    }
+    //console.log(profileFields.skills);
+    //res.send(profileFields.skills);
+
+    // build social object
+    profileFields.social = {}
+    if (youtube) profileFields.social.youtube = youtube;
+    if (twitter) profileFields.social.twitter = twitter;
+    if (facebook) profileFields.social.facebook = facebook;
+    if (linkedln) profileFields.social.linkedln = linkedln;
+    if (instagram) profileFields.social.instagram = instagram;
+
+    try {
+        let profile = await Profile.findOne({ user: req.user.id });
+
+        if (profile) {
+          // update profile
+          profile = await Profile.findOneAndUpdate(
+            { user: req.user.id},
+            { $set: profileFields },
+            { new: true}
+          );
+
+          return res.json(profile);
+        }
+
+        // create profile
+        profile = new Profile(profileFields);
+
+        await profile.save();
+        res.json(profile);
+
+    } catch(err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
     }
-    console.log(profileFields.skills);
-    res.send(profileFields.skills);
 
 });
 
