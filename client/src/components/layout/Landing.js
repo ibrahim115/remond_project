@@ -7,14 +7,16 @@ const Landing = () => {
         <div className="landing-inner">
           <h1 className="x-large">Remonds App</h1>
           <p className="lead">
-            Create Web App with React Express MongoDB and Node <br>Mediocademy</br> 
-            </p>
-            <div className="buttons">
-              <a href="register.html" className="btn btn-primary">Sign Up</a>
-              <a href="login.html" className="btn btn-light">Login</a>
-              </div>
-              </div>
-              </div>
-              </section>  
-              )
-            };export default Landing;
+            Create Web App with React Express MongoDB and Node <br /> Mediocademy
+          </p>
+          <div className="buttons">
+            <a href="register.html" className="btn btn-primary">Sign Up</a>
+            <a href="login.html" className="btn btn-light">Login</a>
+          </div>
+        </div>
+      </div>
+    </section>  
+  )
+};
+
+export default Landing;
